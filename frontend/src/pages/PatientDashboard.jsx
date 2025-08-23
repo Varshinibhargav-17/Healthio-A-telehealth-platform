@@ -33,11 +33,11 @@ const PatientDashboard = () => {
 
   useEffect(() => {
     if (activeSection === 'appointments' || activeSection === 'video') {
-      fetch('http://localhost:5000/api/patient/auth/providers', { credentials: 'include' })
+      fetch(`${import.meta.env.VITE_API_BASE_URL}/api/patient/auth/providers`, { credentials: 'include' })
         .then(res => res.json())
         .then(setProviders)
         .catch(console.error);
-      fetch('http://localhost:5000/api/patient/auth/appointments', { credentials: 'include' })
+      fetch(`${import.meta.env.VITE_API_BASE_URL}/api/patient/auth/appointments`, { credentials: 'include' })
         .then(res => res.json())
         .then(setAppointments)
         .catch(console.error);
@@ -47,7 +47,7 @@ const PatientDashboard = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/patient/auth/profile', {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/patient/auth/profile`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -74,7 +74,7 @@ const PatientDashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/patient/auth/profile', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/patient/auth/profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ const ProviderDashboard = () => {
   
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/provider/auth/appointments', { credentials: 'include' })
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/provider/auth/appointments`, { credentials: 'include' })
       .then(res => res.json())
       .then(setAppointments)
       .catch(console.error);
@@ -39,7 +39,7 @@ const ProviderDashboard = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/provider/auth/profile', {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/provider/auth/profile`, {
           credentials: 'include',
         });
         if (!res.ok) throw new Error('Network response was not ok');
@@ -69,7 +69,7 @@ const ProviderDashboard = () => {
   useEffect(() => {
     if (activeSection === 'billing') {
       setLoadingBillingPatients(true);
-      fetch('http://localhost:5000/api/billing/patients', { credentials: 'include' })
+      fetch(`${import.meta.env.VITE_API_BASE_URL}/api/billing/patients`, { credentials: 'include' })
         .then(res => {
           if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
@@ -100,7 +100,7 @@ const ProviderDashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/provider/auth/profile', {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/provider/auth/profile`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -292,7 +292,7 @@ const ProviderDashboard = () => {
                             onClick={async () => {
                               if (window.confirm('Are you sure you want to cancel this appointment?')) {
                                 const res = await fetch(
-                                  `http://localhost:5000/api/provider/auth/appointments/${app._id}/cancel`,
+                                  `${import.meta.env.VITE_API_BASE_URL}/api/provider/auth/appointments/${app._id}/cancel`,
                                   { method: 'PATCH', credentials: 'include' }
                                 );
                                 if (res.ok) {
