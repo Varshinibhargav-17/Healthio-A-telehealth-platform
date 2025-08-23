@@ -89,7 +89,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI,
+    mongoUrl: process.env.MONGO_URI, // Keep this for legacy support
+    uri: process.env.MONGO_URI,      // <-- This is the key fix
     collectionName: 'sessions'
   }),
   cookie: { 
